@@ -200,7 +200,7 @@ abstract contract FuzzTest {
      * @return addr The computed address.
      * @dev Wraps `fvm.addr(uint256)`.
      */
-    function addr(uint256 privateKey) internal virtual returns (address addr) {
+    function addr(uint256 privateKey) internal virtual returns (address) {
         return fvm.addr(privateKey);
     }
 
@@ -315,24 +315,24 @@ abstract contract FuzzTest {
     /**
      * @notice Creates a labeled address and the corresponding private key deterministically from a string name.
      * @param name The string label used to derive the private key.
-     * @return addr The derived address.
+     * @return addy The derived address.
      * @return privateKey The derived private key.
      * @dev Uses keccak256 on the name to generate the private key, then `fvm.addr` to get the address.
      */
-    function makeAddrAndKey(string memory name) internal virtual returns (address addr, uint256 privateKey) {
+    function makeAddrAndKey(string memory name) internal virtual returns (address addy, uint256 privateKey) {
         privateKey = uint256(keccak256(abi.encodePacked(name)));
-        addr = fvm.addr(privateKey);
+        addy = fvm.addr(privateKey);
         // Medusa does not support labeling directly via cheatcode
     }
 
     /**
      * @notice Creates a labeled address deterministically from a string name.
      * @param name The string label used to derive the private key and address.
-     * @return addr The derived address.
+     * @return addy The derived address.
      * @dev Uses `makeAddrAndKey` internally.
      */
-    function makeAddr(string memory name) internal virtual returns (address addr) {
-        (addr,) = makeAddrAndKey(name);
+    function makeAddr(string memory name) internal virtual returns (address addy) {
+        (addy,) = makeAddrAndKey(name);
     }
 
     /**
