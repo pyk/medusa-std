@@ -18,7 +18,7 @@ abstract contract FuzzTest {
     /**
      * @notice An instance of the Medusa FuzzVM interface for accessing cheatcodes.
      */
-    FuzzVM internal constant fvm = FuzzVM(VM_ADDRESS);
+    FuzzVM private constant fvm = FuzzVM(VM_ADDRESS);
 
     /**
      * @notice Default ETH balance assigned when using hoax functions without specifying a balance.
